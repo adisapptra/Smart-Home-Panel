@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Smart Home Panel</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <!-- Icons (Material Symbols) -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+
+  <!-- Chart.js for optional history -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <div>
+        <h1>Smart Home Panel</h1>
+        <p class="subtitle">Monitoring & Control in Real-Time</p>
+      </div>
+      <div class="status-line">
+        <span id="connectionStatus" class="conn offline">Disconnected</span>
+      </div>
+    </header>
+
+    <section class="cards">
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">wb_sunny</span>
+        </div>
+        <div class="card-body">
+          <h3>Light Intensity</h3>
+          <p id="ldrLabel">--</p>
+          <div class="progress">
+            <div id="ldrBar" class="progress-fill" style="width:0%"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">directions_run</span>
+        </div>
+        <div class="card-body">
+          <h3>Motion Status</h3>
+          <p id="pirLabel">--</p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-icon">
+          <span class="material-symbols-outlined">lightbulb</span>
+        </div>
+        <div class="card-body">
+          <h3>Lamp Status</h3>
+          <p id="lampLabel">--</p>
+          <div id="lampPreview" class="lamp-preview"></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls">
+      <div class="control-card">
+        <h2>Control</h2>
+
+        <div class="row">
+          <label class="switch">
+            <input type="checkbox" id="modeToggle">
+            <span class="slider round"></span>
+          </label>
+          <div>
+            <p class="small">Mode</p>
+            <strong id="modeLabel">--</strong>
+          </div>
+        </div>
+
+        <div class="row control-actions">
+          <button id="btnOn" class="btn primary">Turn ON</button>
+          <button id="btnOff" class="btn outline">Turn OFF</button>
+        </div>
+
+        <div class="row">
+          <label for="brightness">Brightness</label>
+          <input id="brightness" type="range" min="0" max="255" value="180">
+          <div class="small">Value: <span id="brValue">180</span></div>
+        </div>
+      </div>
+
+      <div class="history-card">
+        <h2>Light History (last 60 entries)</h2>
+        <canvas id="ldrChart" height="160"></canvas>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <small>ESP32 • Firebase Realtime Database • GitHub Pages</small>
+    </footer>
+  </main>
+
+  <!-- App Script (module so we can import firebase modular SDK) -->
+  <script type="module" src="script.js"></script>
+</body>
+</html>
